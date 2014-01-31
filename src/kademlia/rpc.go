@@ -78,7 +78,7 @@ func (k *kademlia) FindNode(req FindNodeRequest, res *FindNodeResult) error{
 	res.Nodes = make([]FoundNode, Nodes.Len());
 	
 	for i := 0; i < Nodes.Len(); i++{
-	res.Nodes[i] = *Nodes.At(i).(*ContactRecord).node;
+	//get node info
 	}
 	return;
 }
