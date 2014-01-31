@@ -74,7 +74,7 @@ type FindNodeResult struct {
 }
 
 func (k *kademlia) FindNode(req FindNodeRequest, res *FindNodeResult) error{
-	Nodes := kc.kad.routes.FindClosest(args.target, BucketSize);
+	Nodes := kc.kad.routes.FindClosest(req.ID, BucketSize);
 	res.Nodes = make([]FoundNode, Nodes.Len());
 	
 	for i := 0; i < Nodes.Len(); i++{
