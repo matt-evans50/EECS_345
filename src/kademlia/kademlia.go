@@ -77,3 +77,45 @@ func (table *Table) Update(node *Contact) {
 		//error message
 	}
 }
+
+
+func DoPing(remoteHost net.IP, port uint16) {
+
+	recipient := new(Contact)
+	recipient.Host := remoteHost
+	recipient.Port := port
+// how do I find the remoteHost's Node ID?
+
+	request := new(Ping)
+	response := new(Pong)
+// how do I find the sender's contact info?
+
+	[update recipient's bucket corresponding to the sender]
+//	request.MsgID = k.
+	// if a response, sender must also update bucket
+	error := Ping(request, response)
+	if error == nil {
+//		Update(recipient)
+//		Update(sender)
+	
+	return error
+
+}
+
+
+func DoStore(remoteContact *Contact, Key ID, Value []byte) {
+	
+// create a storeRequest struct
+	Sreq := new(StoreRequest)
+//	Sreq.Sender := [access Sender ID]
+	Sreq.Key := Key
+	Sreq.Value := Value
+
+	//
+	Sres := new(StoreResult)
+
+Sres.Err = Store(Sreq, Sres)
+return
+	
+}
+
