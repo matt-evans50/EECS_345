@@ -73,9 +73,14 @@ type FindNodeResult struct {
     Err error
 }
 
-func (k *Kademlia) FindNode(req FindNodeRequest, res *FindNodeResult) error {
-    // TODO: Implement.
-    return nil
+func (k *kademlia) FindNode(req FindNodeRequest, res *FindNodeResult) error{
+	Nodes := kc.kad.routes.FindClosest(args.target, BucketSize);
+	res.Nodes = make([]FoundNode, Nodes.Len());
+	
+	for i := 0; i < Nodes.Len(); i++{
+	response.Nodes[i] = *contacts.At(i).(*ContactRecord).node;
+	}
+	return;
 }
 
 
