@@ -46,10 +46,13 @@ type StoreResult struct {
 }
 
 func (k *Kademlia) Store(req StoreRequest, res *StoreResult) error {
-    // TODO: Implement.
+    if req.Value > [max_size_allowed] {
+	return error.String("Value too large to store") }
+
+//  k.[store](req.Key, req.Value)
+    res.MsgID = CopyID(req.MsgID)
     return nil
 }
-
 
 // FIND_NODE
 type FindNodeRequest struct {
