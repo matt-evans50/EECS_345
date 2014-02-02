@@ -27,9 +27,33 @@ type Pong struct {
 
 func (k *Kademlia) Ping(ping Ping, pong *Pong) error {
     // This one's a freebie.
-    pong.MsgID = CopyID(ping.MsgID)
-    return nil
+    if err = k.HandleRPC(&args.RPCHeader, &response.RPCHeader); err == nil {
+    	log.Printf("ping from: %s\n", args.RPCHeader) 
+    return
 }
+
+// RPC Helper functions
+
+type RPCHeader struct {
+  Sender *Contact;
+  NetworkId string;
+}
+
+func (k *Kademlia) HandleRPC(request, response *RPCHeader) error {
+  if request.NetworkId != k.NetworkId {
+  	log.Printf("Network IDs do not match"0)
+	return error
+  }
+  if request.Sender != nil {
+    k.table.Update(request.Sender);
+  }
+  response.Sender = &k.routes.node;
+  return nil;
+}
+
+
+
+
 
 
 // STORE
