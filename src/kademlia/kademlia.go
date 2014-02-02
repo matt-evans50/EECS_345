@@ -80,25 +80,19 @@ func (table *Table) Update(node *Contact) {
 
 
 func DoPing(remoteHost net.IP, port uint16) {
+	ping := new(kademlia.Ping)
+    	ping.MsgID = kademlia.NewRandomID()
+    	var pong kademlia.Pong
+    	err = client.Call("Kademlia.Ping", ping, &pong)
+    	if err != nil {
+        	log.Fatal("Call: ", err)
+    	}
 
-	recipient := new(Contact)
-	recipient.Host := remoteHost
-	recipient.Port := port
-// how do I find the remoteHost's Node ID?
-
-	request := new(Ping)
-	response := new(Pong)
-// how do I find the sender's contact info?
-
-	[update recipient's bucket corresponding to the sender]
-//	request.MsgID = k.
-	// if a response, sender must also update bucket
-	error := Ping(request, response)
-	if error == nil {
-//		Update(recipient)
-//		Update(sender)
+    	log.Printf("ping msgID: %s\n", ping.MsgID.AsString())
+    	log.Printf("pong msgID: %s\n", pong.MsgID.AsString())
 	
-	return error
+
+	return
 
 }
 
